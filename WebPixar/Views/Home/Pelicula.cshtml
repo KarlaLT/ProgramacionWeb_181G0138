@@ -1,0 +1,47 @@
+﻿@model Pelicula
+@{
+    ViewData["Title"] = "DetallePeliculas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+ 
+    <main>
+
+        <div id="principalVer">
+
+            <div class="container">
+                <img src="~/images/banners/@Model.Id.ToString()_b.jpg" />
+                <div class="overlay">
+                    <img src="~/images/banners/@Model.Id.ToString()_b.png" />
+                </div>
+
+            </div>
+            <div class="datosPelicula">
+                <h1>@Model.Nombre</h1>
+                <h2>@Model.NombreOriginal • @Model.FechaEstreno.Value.Date.ToShortDateString()</h2>
+                <p>@Model.Descripción</p>
+
+
+                <div class="personajes">
+                    <h2>Personajes</h2>
+                    @foreach (var aparicion in Model.Apariciones)
+                    {
+                        <div>
+                            <a>
+                                @{
+                                    int id = aparicion.IdPersonajeNavigation.Id;
+                                    string imagen = $"{id}.jpg";
+                                }
+                                <img src="~/images/personajes/@imagen" />
+                            </a>
+                            <div class="nombrePelicula">
+                                <p>@aparicion.IdPersonajeNavigation.Nombre</p>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+
+    </main>
+  
