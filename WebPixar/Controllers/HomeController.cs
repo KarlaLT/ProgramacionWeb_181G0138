@@ -29,9 +29,12 @@ namespace WebPixar.Controllers
             var portadas = pelis.Select(x => new PortadasViewModel(x));
             return View(portadas);
         }
-        public IActionResult Cortometrajes()
+        public IActionResult Cortometrajes(string categoria)
         {
-            return View();
+            CortometrajesRepository cr = new CortometrajesRepository(context);
+            var cortometrajes = cr.GetCortometrajesByCategoria(categoria);
+            var portadas = cortometrajes.Select(x => new PortadasCortometrajesViewModel(x));
+            return View(portadas);
         }
  
         public IActionResult Pelicula(int id)
